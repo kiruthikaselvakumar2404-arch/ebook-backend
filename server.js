@@ -9,9 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 /* 🔗 MongoDB Connection */
-mongoose.connect(
-  "mongodb+srv://kiruthika240406_db_user:Kiruthika24@cluster0.uhavzow.mongodb.net/reviewsDB?retryWrites=true&w=majority"
-)
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("✅ MongoDB Connected"))
 .catch((err) => console.log("❌ DB Error:", err));
 
@@ -47,7 +45,7 @@ app.get("/reviews", async (req, res) => {
 });
 
 /* 🌐 Server */
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
